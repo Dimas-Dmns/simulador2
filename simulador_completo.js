@@ -1,6 +1,7 @@
 let clientes = [];
 let clienteSeleccionado = null;
 let tasaInteres = 15;
+let clienteCreditoSeleccionado = null;
 
 
 /* =========================================
@@ -274,3 +275,53 @@ function limpiar() {
 
 // Mostrar la tabla al cargar la página.
 pintarClientes();
+
+function buscarClienteCredito() {
+    let cedula = document.getElementById("txtCedulaCredito").value.trim();
+
+    let mensaje = document.getElementById("mensajeCredito");
+    let datosClienteCredito = document.getElementById("datosClienteCredito");
+    let resultadoCredito = document.getElementById("resultadoCredito");
+
+    mensaje.textContent = "";
+    datosClienteCredito.innerHTML = "";
+    resultadoCredito.innerHTML = "";
+    resultadoCredito.className = "";
+
+    clienteCreditoSeleccionado = null;
+
+    if (cedula === "") {
+        mensaje.textContent = "Ingresa la cédula del cliente.";
+        return;
+    }
+
+    let clienteEncontrado = buscarCliente(cedula);
+
+    if (clienteEncontrado === null) {
+        mensaje.textContent = "No se encontró un cliente con esa cédula.";
+        return;
+    }
+
+    if (
+        clienteEncontrado.apellido === undefined ||
+        clienteEncontrado.ingresos === undefined ||
+        clienteEncontrado.egresos === undefined
+    ) {
+        mensaje.textContent =
+            "El cliente no tiene registrados apellido, ingresos y egresos. Actualiza sus datos en la sección Clientes.";
+        return;
+    }
+
+    clienteCreditoSeleccionado = clienteEncontrado;
+
+    datosClienteCredito.innerHTML = `
+        <h3>Datos del Cliente</h3>
+        <p><strong>Cédula:</strong> ${escaparHTML(clienteEncontrado.cedula)}</p>
+        <p><strong>Nombre:</strong> ${escaparHTML(clienteEncontrado.nombre)}</p>
+        <p><strong>Apellido:</strong> ${escaparHTML(clienteEncontrado.apellido)}</p>
+        <p><strong>Ingresos:</strong> $${Number(clienteEncontrado.ingresos).toFixed(2)}</p>
+        <p><strong>Egresos:</strong> $${Number(clienteEncontrado.egresos).toFixed(2)}</p>
+    `;
+
+    mensaje.textContent = "Cliente encontrado correctamente.";
+}
