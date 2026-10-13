@@ -157,15 +157,15 @@ function pintarClientes() {
         contenido += `
             <tr>
                 <td>${escaparHTML(cliente.cedula)}</td>
-
                 <td>${escaparHTML(cliente.nombre)}</td>
-
-                <td>${cliente.edad}</td>
-
+                <td>${escaparHTML(cliente.apellido)}</td>
+                <td>$${Number(cliente.ingresos).toFixed(2)}</td>
+                <td>$${Number(cliente.egresos).toFixed(2)}</td>
                 <td>
                     <button
                         type="button"
-                        onclick="seleccionarCliente('${cliente.cedula}')">
+                        onclick="seleccionarCliente('${cliente.cedula}')"
+                    >
                         Actualizar
                     </button>
                 </td>
@@ -173,10 +173,8 @@ function pintarClientes() {
         `;
     }
 
-    document.getElementById("tablaClientes").innerHTML =
-        contenido;
+    document.getElementById("tablaClientes").innerHTML = contenido;
 }
-
 
 // Evita interpretar los datos de texto como HTML.
 function escaparHTML(valor) {
@@ -217,42 +215,32 @@ function seleccionarCliente(cedula) {
     if (clienteEncontrado === null) {
         document.getElementById("mensajeCliente").textContent =
             "No se encontró el cliente.";
-
         return;
     }
 
     clienteSeleccionado = clienteEncontrado;
 
-    document.getElementById("txtCedula").value =
-        clienteSeleccionado.cedula;
+    document.getElementById("txtCedula").value = clienteSeleccionado.cedula;
+    document.getElementById("txtNombre").value = clienteSeleccionado.nombre;
+    document.getElementById("txtApellido").value = clienteSeleccionado.apellido;
+    document.getElementById("txtIngresos").value = clienteSeleccionado.ingresos;
+    document.getElementById("txtEgresos").value = clienteSeleccionado.egresos;
 
-    document.getElementById("txtNombre").value =
-        clienteSeleccionado.nombre;
-
-    document.getElementById("txtEdad").value =
-        clienteSeleccionado.edad;
-
-    // La cédula no se modifica al actualizar.
     document.getElementById("txtCedula").readOnly = true;
 
     document.getElementById("mensajeCliente").textContent =
         "Modifica los datos y pulsa Guardar cliente.";
 }
 
-
-/* =========================================
-   PARTE 3B: LIMPIAR FORMULARIO
-========================================= */
-
 function limpiar() {
     document.getElementById("txtCedula").value = "";
     document.getElementById("txtNombre").value = "";
-    document.getElementById("txtEdad").value = "";
+    document.getElementById("txtApellido").value = "";
+    document.getElementById("txtIngresos").value = "";
+    document.getElementById("txtEgresos").value = "";
 
-    // Habilitar nuevamente la cédula.
     document.getElementById("txtCedula").readOnly = false;
 
-    // Salir del modo de actualización.
     clienteSeleccionado = null;
 }
 
