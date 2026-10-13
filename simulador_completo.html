@@ -1,15 +1,11 @@
-
 <!DOCTYPE html>
 <html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Simulador de Crédito</title>
-
     <link rel="stylesheet" href="simulador_completo.css">
-
     <script src="simulador_completo.js" defer></script>
 </head>
 
@@ -30,18 +26,16 @@
 
         <button type="button" onclick="mostrarSeccion('creditos')">
             Créditos
-          </button>
+        </button>
     </nav>
 
     <main>
 
-        <!-- PARTE 1 Y PARTE 2: NAVEGACIÓN Y TASA -->
+        <!-- SECCIÓN: PARÁMETROS -->
         <section id="parametros" class="activa">
-
             <h2>Configuración de parámetros</h2>
 
             <label for="tasaInteres">Tasa de interés (%):</label>
-
             <input
                 type="number"
                 id="tasaInteres"
@@ -55,17 +49,14 @@
             </button>
 
             <p id="mensajeTasa"></p>
-
         </section>
 
-        <!-- PARTE 3: ADMINISTRACIÓN DE CLIENTES -->
+        <!-- SECCIÓN: CLIENTES -->
         <section id="clientes">
-
             <h2>Administración de clientes</h2>
 
             <div>
                 <label for="txtCedula">Cédula:</label>
-
                 <input
                     type="text"
                     id="txtCedula"
@@ -77,7 +68,6 @@
 
             <div>
                 <label for="txtNombre">Nombre:</label>
-
                 <input
                     type="text"
                     id="txtNombre"
@@ -85,30 +75,37 @@
                 >
             </div>
 
-<label for="txtApellido">Apellido:</label>
-<input
-    type="text"
-    id="txtApellido"
-    placeholder="Ingresa el apellido"
->
+            <div>
+                <label for="txtApellido">Apellido:</label>
+                <input
+                    type="text"
+                    id="txtApellido"
+                    placeholder="Ingresa el apellido"
+                >
+            </div>
 
-<label for="txtIngresos">Ingresos mensuales:</label>
-<input
-    type="number"
-    id="txtIngresos"
-    min="0"
-    step="0.01"
-    placeholder="Ejemplo: 1000"
->
+            <div>
+                <label for="txtIngresos">Ingresos mensuales:</label>
+                <input
+                    type="number"
+                    id="txtIngresos"
+                    min="0"
+                    step="0.01"
+                    placeholder="Ejemplo: 1000"
+                >
+            </div>
 
-<label for="txtEgresos">Egresos mensuales:</label>
-<input
-    type="number"
-    id="txtEgresos"
-    min="0"
-    step="0.01"
-    placeholder="Ejemplo: 600"
->
+            <div>
+                <label for="txtEgresos">Egresos mensuales:</label>
+                <input
+                    type="number"
+                    id="txtEgresos"
+                    min="0"
+                    step="0.01"
+                    placeholder="Ejemplo: 600"
+                >
+            </div>
+
             <div>
                 <button type="button" onclick="guardarCliente()">
                     Guardar cliente
@@ -124,69 +121,68 @@
             <h3>Lista de clientes</h3>
 
             <table>
-               <thead>
-    <tr>
-        <th>Cédula</th>
-        <th>Nombre</th>
-        <th>Apellido</th>
-        <th>Ingresos</th>
-        <th>Egresos</th>
-        <th>Acción</th>
-    </tr>
-</thead>
-<tbody id="tablaClientes"></tbody>
-                </tbody>
+                <thead>
+                    <tr>
+                        <th>Cédula</th>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Ingresos</th>
+                        <th>Egresos</th>
+                        <th>Acción</th>
+                    </tr>
+                </thead>
+                <tbody id="tablaClientes"></tbody>
             </table>
-
         </section>
+
+        <!-- SECCIÓN: CRÉDITOS -->
         <section id="creditos">
-    <h2>Simulación de Crédito</h2>
+            <h2>Simulación de Crédito</h2>
 
-    <div class="formulario">
-        <label for="txtCedulaCredito">Cédula del cliente:</label>
-        <input
-            type="text"
-            id="txtCedulaCredito"
-            maxlength="10"
-            placeholder="Ingresa la cédula"
-        >
+            <div class="formulario">
+                <label for="txtCedulaCredito">Cédula del cliente:</label>
+                <input
+                    type="text"
+                    id="txtCedulaCredito"
+                    maxlength="10"
+                    placeholder="Ingresa la cédula"
+                >
 
-        <button type="button" onclick="buscarClienteCredito()">
-            Buscar cliente
-        </button>
-    </div>
+                <button type="button" onclick="buscarClienteCredito()">
+                    Buscar cliente
+                </button>
+            </div>
 
-    <p id="mensajeCredito"></p>
+            <p id="mensajeCredito"></p>
 
-    <div id="datosClienteCredito"></div>
+            <div id="datosClienteCredito"></div>
 
-    <div class="formulario">
-        <label for="txtMontoCredito">Monto solicitado ($):</label>
-        <input
-            type="number"
-            id="txtMontoCredito"
-            min="1"
-            placeholder="Ejemplo: 2000"
-        >
+            <div class="formulario">
+                <label for="txtMontoCredito">Monto solicitado ($):</label>
+                <input
+                    type="number"
+                    id="txtMontoCredito"
+                    min="1"
+                    placeholder="Ejemplo: 2000"
+                >
 
-        <label for="txtPlazoCredito">Plazo en años:</label>
-        <input
-            type="number"
-            id="txtPlazoCredito"
-            min="1"
-            placeholder="Ejemplo: 2"
-        >
+                <label for="txtPlazoCredito">Plazo en años:</label>
+                <input
+                    type="number"
+                    id="txtPlazoCredito"
+                    min="1"
+                    placeholder="Ejemplo: 2"
+                >
 
-        <button type="button" onclick="calcularCreditoCliente()">
-            Calcular crédito
-        </button>
-    </div>
+                <button type="button" onclick="calcularCreditoCliente()">
+                    Calcular crédito
+                </button>
+            </div>
 
-    <div id="resultadoCredito"></div>
-</section>
+            <div id="resultadoCredito"></div>
+        </section>
 
     </main>
 
 </body>
-
 </html>
