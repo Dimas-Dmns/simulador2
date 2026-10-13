@@ -45,21 +45,50 @@ function guardarTasa() {
         "Tasa configurada correctamente: " + valorTasa + "%";
 }
 
+
 function guardarCliente() {
     let valorCedula = document.getElementById("txtCedula").value.trim();
     let valorNombre = document.getElementById("txtNombre").value.trim();
-    let valorEdad = Number(document.getElementById("txtEdad").value);
+    let valorEdadTexto = document.getElementById("txtEdad").value.trim();
+    let valorEdad = Number(valorEdadTexto);
 
-    let datoCliente = {};
+    if (
+        valorCedula === "" ||
+        valorNombre === "" ||
+        valorEdadTexto === "" ||
+        !Number.isFinite(valorEdad)
+    ) {
+        alert("Completa todos los campos correctamente.");
+        return;
+    }
 
-    datoCliente.cedula = valorCedula;
-    datoCliente.nombre = valorNombre;
-    datoCliente.edad = valorEdad;
+    if (clienteSeleccionado !== null) {
+        // Actualizar el objeto seleccionado.
+        clienteSeleccionado.nombre = valorNombre;
+        clienteSeleccionado.edad = valorEdad;
+    } else {
+        // Buscar si ya existe la cédula.
+        let clienteExistente = buscarCliente(valorCedula);
 
-    clientes.push(datoCliente);
+        if (clienteExistente !== null) {
+            alert("Ya existe un cliente con esa cédula.");
+            return;
+        }
+
+        // Crear un nuevo cliente.
+        let datoCliente = {};
+
+        datoCliente.cedula = valorCedula;
+        datoCliente.nombre = valorNombre;
+        datoCliente.edad = valorEdad;
+
+        clientes.push(datoCliente);
+    }
 
     pintarClientes();
+    limpiar();
 }
+
 
 function pintarClientes() {
     let contenido = "";
