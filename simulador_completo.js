@@ -11,3 +11,12 @@
 
   
 //Para recuperar o mostrar información usar los métodos de la clase utilitarios, puede agregar métodos adicionales en utilitarios
+
+function ocultarSecciones() {
+    let secciones = document.querySelectorAll("section");
+
+    secciones.forEach(function(seccion) {
+        seccion.classList.remove("activa");
+    });
+}
+
