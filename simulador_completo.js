@@ -61,5 +61,28 @@ function guardarCliente() {
     pintarClientes();
 }
 
+function pintarClientes() {
+    let contenido = "";
+
+    for (let i = 0; i < clientes.length; i++) {
+        let cliente = clientes[i];
+
+        contenido += `
+            <tr>
+                <td>${cliente.cedula}</td>
+                <td>${cliente.nombre}</td>
+                <td>${cliente.edad}</td>
+                <td>
+                    <button onclick="seleccionarCliente('${cliente.cedula}')">
+                        Actualizar
+                    </button>
+                </td>
+            </tr>
+        `;
+    }
+
+    document.getElementById("tablaClientes").innerHTML = contenido;
+}
+
 
 
