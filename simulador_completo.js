@@ -140,5 +140,12 @@ function seleccionarCliente(cedula) {
         clienteSeleccionado.edad;
 }
 
+function limpiar() {
+    document.getElementById("txtCedula").value = "";
+    document.getElementById("txtNombre").value = "";
+    document.getElementById("txtEdad").value = "";
+
+    clienteSeleccionado = null;
+}
 
 
