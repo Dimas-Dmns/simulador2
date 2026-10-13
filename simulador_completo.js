@@ -45,3 +45,21 @@ function guardarTasa() {
         "Tasa configurada correctamente: " + valorTasa + "%";
 }
 
+function guardarCliente() {
+    let valorCedula = document.getElementById("txtCedula").value.trim();
+    let valorNombre = document.getElementById("txtNombre").value.trim();
+    let valorEdad = Number(document.getElementById("txtEdad").value);
+
+    let datoCliente = {};
+
+    datoCliente.cedula = valorCedula;
+    datoCliente.nombre = valorNombre;
+    datoCliente.edad = valorEdad;
+
+    clientes.push(datoCliente);
+
+    pintarClientes();
+}
+
+
+
