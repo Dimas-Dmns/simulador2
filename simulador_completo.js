@@ -71,97 +71,81 @@ function guardarTasa() {
 
 // Crear o actualizar un cliente.
 function guardarCliente() {
-    let valorCedula =
-        document.getElementById("txtCedula").value.trim();
+    let valorCedula = document.getElementById("txtCedula").value.trim();
+    let valorNombre = document.getElementById("txtNombre").value.trim();
+    let valorApellido = document.getElementById("txtApellido").value.trim();
 
-    let valorNombre =
-        document.getElementById("txtNombre").value.trim();
+    let ingresosTexto = document.getElementById("txtIngresos").value;
+    let egresosTexto = document.getElementById("txtEgresos").value;
 
-
-let valorApellido = document.getElementById("txtApellido").value.trim();
-
-let valorIngresos = Number(document.getElementById("txtIngresos").value);
-let valorEgresos = Number(document.getElementById("txtEgresos").value);
-
-let datoCliente = {};
-datoCliente.cedula = valorCedula;
-datoCliente.nombre = valorNombre;
-datoCliente.apellido = valorApellido;
-datoCliente.ingresos = valorIngresos;
-datoCliente.egresos = valorEgresos;
+    let valorIngresos = Number(ingresosTexto);
+    let valorEgresos = Number(egresosTexto);
 
     let mensaje = document.getElementById("mensajeCliente");
 
-    // Validar cédula.
     if (!/^\d{10}$/.test(valorCedula)) {
-        mensaje.textContent =
-            "La cédula debe contener exactamente 10 dígitos.";
-
+        mensaje.textContent = "La cédula debe contener exactamente 10 dígitos.";
         return;
     }
 
-    // Validar nombre.
-    if (valorNombre === "") {
-        mensaje.textContent =
-            "Debes ingresar el nombre del cliente.";
-
+    if (valorNombre === "" || valorApellido === "") {
+        mensaje.textContent = "Ingresa el nombre y apellido.";
         return;
     }
 
-    // Validar edad.
     if (
-        valorEdadTexto === "" ||
-        !Number.isInteger(valorEdad) ||
-        valorEdad < 0
+        ingresosTexto.trim() === "" ||
+        !Number.isFinite(valorIngresos) ||
+        valorIngresos < 0
     ) {
-        mensaje.textContent =
-            "Ingresa una edad válida.";
-
+        mensaje.textContent = "Ingresa un valor válido para los ingresos.";
         return;
     }
 
-    // Si hay un cliente seleccionado, actualizarlo.
+    if (
+        egresosTexto.trim() === "" ||
+        !Number.isFinite(valorEgresos) ||
+        valorEgresos < 0
+    ) {
+        mensaje.textContent = "Ingresa un valor válido para los egresos.";
+        return;
+    }
+
+    let clienteExistente = buscarCliente(valorCedula);
+
     if (clienteSeleccionado !== null) {
-
-        clienteSeleccionado.nombre = valorNombre;
-        clienteSeleccionado.edad = valorEdad;
-
-        mensaje.textContent =
-            "Cliente actualizado correctamente.";
-
-    } else {
-
-        // Buscar si ya existe la cédula.
-        let clienteExistente = buscarCliente(valorCedula);
-
-        if (clienteExistente !== null) {
-            mensaje.textContent =
-                "Ya existe un cliente con esa cédula.";
-
+        if (clienteSeleccionado.cedula !== valorCedula) {
+            mensaje.textContent = "No puedes cambiar la cédula del cliente seleccionado.";
             return;
         }
 
-        // Crear un objeto cliente.
-        let datoCliente = {};
+        clienteSeleccionado.nombre = valorNombre;
+        clienteSeleccionado.apellido = valorApellido;
+        clienteSeleccionado.ingresos = valorIngresos;
+        clienteSeleccionado.egresos = valorEgresos;
 
-        datoCliente.cedula = valorCedula;
-        datoCliente.nombre = valorNombre;
-        datoCliente.edad = valorEdad;
+        mensaje.textContent = "Cliente actualizado correctamente.";
+    } else {
+        if (clienteExistente !== null) {
+            mensaje.textContent = "Ya existe un cliente con esa cédula.";
+            return;
+        }
 
-        // Agregar el objeto al arreglo.
+        let datoCliente = {
+            cedula: valorCedula,
+            nombre: valorNombre,
+            apellido: valorApellido,
+            ingresos: valorIngresos,
+            egresos: valorEgresos
+        };
+
         clientes.push(datoCliente);
-
-        mensaje.textContent =
-            "Cliente guardado correctamente.";
+        mensaje.textContent = "Cliente guardado correctamente.";
     }
 
-    // Actualizar la tabla.
     pintarClientes();
-
-    // Vaciar los campos.
     limpiar();
 }
-
 
 // Genera las filas de la tabla dinámicamente.
 function pintarClientes() {
