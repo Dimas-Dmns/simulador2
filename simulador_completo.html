@@ -85,17 +85,30 @@
                 >
             </div>
 
-            <div>
-                <label for="txtEdad">Edad:</label>
+<label for="txtApellido">Apellido:</label>
+<input
+    type="text"
+    id="txtApellido"
+    placeholder="Ingresa el apellido"
+>
 
-                <input
-                    type="number"
-                    id="txtEdad"
-                    placeholder="Ingrese la edad"
-                    min="0"
-                >
-            </div>
+<label for="txtIngresos">Ingresos mensuales:</label>
+<input
+    type="number"
+    id="txtIngresos"
+    min="0"
+    step="0.01"
+    placeholder="Ejemplo: 1000"
+>
 
+<label for="txtEgresos">Egresos mensuales:</label>
+<input
+    type="number"
+    id="txtEgresos"
+    min="0"
+    step="0.01"
+    placeholder="Ejemplo: 600"
+>
             <div>
                 <button type="button" onclick="guardarCliente()">
                     Guardar cliente

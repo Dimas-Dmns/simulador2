@@ -76,10 +76,18 @@ function guardarCliente() {
     let valorNombre =
         document.getElementById("txtNombre").value.trim();
 
-    let valorEdadTexto =
-        document.getElementById("txtEdad").value.trim();
 
-    let valorEdad = Number(valorEdadTexto);
+let valorApellido = document.getElementById("txtApellido").value.trim();
+
+let valorIngresos = Number(document.getElementById("txtIngresos").value);
+let valorEgresos = Number(document.getElementById("txtEgresos").value);
+
+let datoCliente = {};
+datoCliente.cedula = valorCedula;
+datoCliente.nombre = valorNombre;
+datoCliente.apellido = valorApellido;
+datoCliente.ingresos = valorIngresos;
+datoCliente.egresos = valorEgresos;
 
     let mensaje = document.getElementById("mensajeCliente");
 
