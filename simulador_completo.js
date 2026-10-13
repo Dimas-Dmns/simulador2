@@ -26,3 +26,22 @@ function mostrarSeccion(id) {
     document.getElementById(id).classList.add("activa");
 }
 
+function guardarTasa() {
+    let componente = document.getElementById("tasaInteres");
+    let valorTasa = Number(componente.value);
+    let mensaje = document.getElementById("mensajeTasa");
+
+    if (
+        componente.value.trim() === "" ||
+        !Number.isFinite(valorTasa) ||
+        valorTasa < 10 ||
+        valorTasa > 20
+    ) {
+        mensaje.textContent = "La tasa debe estar entre 10% y 20%";
+        return;
+    }
+
+    mensaje.textContent =
+        "Tasa configurada correctamente: " + valorTasa + "%";
+}
+
