@@ -84,5 +84,32 @@ function pintarClientes() {
     document.getElementById("tablaClientes").innerHTML = contenido;
 }
 
+function buscarCliente(cedula) {
+    for (let i = 0; i < clientes.length; i++) {
+        if (clientes[i].cedula === cedula) {
+            return clientes[i];
+        }
+    }
+
+    return null;
+}
+
+function seleccionarCliente(cedula) {
+    clienteSeleccionado = buscarCliente(cedula);
+
+    if (clienteSeleccionado === null) {
+        return;
+    }
+
+    document.getElementById("txtCedula").value =
+        clienteSeleccionado.cedula;
+
+    document.getElementById("txtNombre").value =
+        clienteSeleccionado.nombre;
+
+    document.getElementById("txtEdad").value =
+        clienteSeleccionado.edad;
+}
+
 
 
