@@ -20,3 +20,9 @@ function ocultarSecciones() {
     });
 }
 
+function mostrarSeccion(id) {
+    ocultarSecciones();
+
+    document.getElementById(id).classList.add("activa");
+}
+
