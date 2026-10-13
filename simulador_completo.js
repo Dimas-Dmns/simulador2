@@ -325,3 +325,96 @@ function buscarClienteCredito() {
 
     mensaje.textContent = "Cliente encontrado correctamente.";
 }
+
+function calcularDisponible(ingresos, egresos) {
+    let disponible = ingresos - egresos;
+
+    if (disponible < 0) {
+        return 0;
+    }
+
+    return disponible;
+}
+
+function calcularCapacidadPago(montoDisponible) {
+    return montoDisponible * 0.5;
+}
+
+function calcularInteresSimple(monto, tasa, plazoAnios) {
+    return monto * (tasa / 100) * plazoAnios;
+}
+
+function calcularTotalPagar(monto, interes) {
+    return monto + interes + 100;
+}
+
+function calcularCuotaMensual(total, plazoAnios) {
+    return total / (plazoAnios * 12);
+}
+
+function aprobarCredito(capacidadPago, cuotaMensual) {
+    return capacidadPago > cuotaMensual;
+}
+
+function calcularCreditoCliente() {
+    let mensaje = document.getElementById("mensajeCredito");
+    let resultadoCredito = document.getElementById("resultadoCredito");
+
+    if (clienteCreditoSeleccionado === null) {
+        mensaje.textContent = "Primero busca un cliente por su cédula.";
+        return;
+    }
+
+    let montoTexto = document.getElementById("txtMontoCredito").value;
+    let plazoTexto = document.getElementById("txtPlazoCredito").value;
+
+    let monto = Number(montoTexto);
+    let plazoAnios = Number(plazoTexto);
+
+    if (
+        montoTexto.trim() === "" ||
+        !Number.isFinite(monto) ||
+        monto <= 0
+    ) {
+        mensaje.textContent = "Ingresa un monto de crédito válido.";
+        return;
+    }
+
+    if (
+        plazoTexto.trim() === "" ||
+        !Number.isInteger(plazoAnios) ||
+        plazoAnios <= 0
+    ) {
+        mensaje.textContent = "Ingresa un plazo válido en años.";
+        return;
+    }
+
+    let ingresos = Number(clienteCreditoSeleccionado.ingresos);
+    let egresos = Number(clienteCreditoSeleccionado.egresos);
+
+    let disponible = calcularDisponible(ingresos, egresos);
+    let capacidadPago = calcularCapacidadPago(disponible);
+
+    let tasa = Number(tasaInteres);
+    let interes = calcularInteresSimple(monto, tasa, plazoAnios);
+    let totalPagar = calcularTotalPagar(monto, interes);
+    let cuotaMensual = calcularCuotaMensual(totalPagar, plazoAnios);
+
+    let creditoAprobado = aprobarCredito(capacidadPago, cuotaMensual);
+
+    resultadoCredito.innerHTML = `
+        <h3>Resultado del Crédito</h3>
+        Capacidad de pago: $${capacidadPago.toFixed(2)}<br>
+        Total a pagar: $${totalPagar.toFixed(2)}<br>
+        Cuota mensual: $${cuotaMensual.toFixed(2)}<br>
+        RESULTADO: ${creditoAprobado ? "APROBADO" : "RECHAZADO"}
+    `;
+
+    if (creditoAprobado) {
+        resultadoCredito.className = "aprobado";
+    } else {
+        resultadoCredito.className = "rechazado";
+    }
+
+    mensaje.textContent = "Cálculo realizado correctamente.";
+}
