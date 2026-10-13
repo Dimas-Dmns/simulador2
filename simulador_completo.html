@@ -1,142 +1,100 @@
-
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema Básico de Créditos</title>
-    <link rel="stylesheet" href="simulador_completo.css">
-    <script src="utilitarios.js" defer></script>
-    <script src="simulador_completo.js" defer></script>
+  <meta charset="UTF-8">
+  <title>Sistema de Créditos</title>
 </head>
-
 <body>
 
-    <header>
-        <h1>Sistema Básico de Créditos</h1>
-        <p>Administración de parámetros y clientes</p>
-    </header>
+<header>
+  <h1>Sistema Básico de Créditos</h1>
+   <link rel="stylesheet" href="simulador_completo.css">
+</header>
 
-    <nav>
-        <button type="button"
-            onclick="mostrarSeccion('parametros')">
-            Parámetros
-        </button>
+<nav>
+  <button>Parámetros</button>
+  <button>Clientes</button>
+</nav>
 
-        <button type="button"
-            onclick="mostrarSeccion('clientes')">
-            Clientes
-        </button>
-    </nav>
+<section id="parametros" class="activa">
+  <h2>Configurar Parámetros</h2>
 
-    <main>
+  <label>Tasa de interés:</label>
+  <input type="number" id="tasaInteres">
+  <span>%</span>
 
-        <section id="parametros" class="activa">
-            <h2>Configurar parámetros</h2>
+  <br>
+  <button>Guardar tasa</button>
 
-            <label for="tasaInteres">Tasa de interés (%):</label>
+  <p id="mensajeTasa"></p>
+</section>
 
-            <input
-                type="number"
-                id="tasaInteres"
-                min="10"
-                max="20"
-                step="0.5"
-                value="15"
-            >
+<section id="clientes">
+  <h2>Registro de Clientes</h2>
 
-            <button type="button" onclick="guardarTasa()">
-                Guardar tasa
-            </button>
+  <input type="text" >
+  <input type="text" >
+  <input type="text" >
+  <input type="number" >
+  <input type="number" >
 
-            <p id="mensajeTasa" aria-live="polite"></p>
-        </section>
+  <br>
 
-        <section id="clientes">
-            <h2>Registro de clientes</h2>
+  <button >Guardar cliente</button>
+  <button >Limpiar</button>
 
-            <div class="formulario-clientes">
+  <table>
+    <thead>
+      <tr>
+        <th>Cédula</th>
+        <th>Nombre</th>
+        <th>Apellido</th>
+        <th>Ingresos</th>
+        <th>Egresos</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody id="tablaClientes">
+       <tr>
+          <td>1712345678</td>
+          <td>Juan</td>
+          <td>Pérez</td>
+          <td>1200</td>
+          <td>500</td>
+          <td>
+            <button>Actualizar</button>
+            <button>Eliminar</button>
+          </td>
+        </tr>
+        <tr>
+          <td>1723456789</td>
+          <td>María</td>
+          <td>Gómez</td>
+          <td>1500</td>
+          <td>600</td>
+          <td>
+            <button>Actualizar</button>
+            <button>Eliminar</button>
+          </td>
+        </tr>
+        <tr>
+          <td>1734567890</td>
+          <td>Carlos</td>
+          <td>Ramírez</td>
+          <td>900</td>
+          <td>350</td>
+          <td>
+            <button>Actualizar</button>
+            <button>Eliminar</button>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+</section>
 
-                <label for="txtCedula">Cédula</label>
-                <input
-                    type="text"
-                    id="txtCedula"
-                    placeholder="Ej. 1712345678"
-                    maxlength="10"
-                    inputmode="numeric"
-                >
 
-                <label for="txtNombre">Nombre</label>
-                <input
-                    type="text"
-                    id="txtNombre"
-                    placeholder="Ingrese el nombre"
-                >
 
-                <label for="txtApellido">Apellido</label>
-                <input
-                    type="text"
-                    id="txtApellido"
-                    placeholder="Ingrese el apellido"
-                >
-
-                <label for="txtIngresos">Ingresos mensuales ($)</label>
-                <input
-                    type="number"
-                    id="txtIngresos"
-                    placeholder="Ej. 1200"
-                    min="0"
-                    step="0.01"
-                >
-
-                <label for="txtEgresos">Egresos mensuales ($)</label>
-                <input
-                    type="number"
-                    id="txtEgresos"
-                    placeholder="Ej. 500"
-                    min="0"
-                    step="0.01"
-                >
-
-            </div>
-
-            <div class="acciones">
-                <button type="button" onclick="guardarCliente()">
-                    Guardar cliente
-                </button>
-
-                <button type="button" onclick="limpiar()">
-                    Limpiar
-                </button>
-            </div>
-
-            <p id="mensajeCliente" aria-live="polite"></p>
-
-            <div class="tabla-contenedor">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Cédula</th>
-                            <th>Nombre</th>
-                            <th>Apellido</th>
-                            <th>Ingresos</th>
-                            <th>Egresos</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
-
-                    <tbody id="tablaClientes">
-                    </tbody>
-                </table>
-            </div>
-        </section>
-
-    </main>
-
-    <footer>
-        <p>Sistema Básico de Créditos | 2026</p>
-    </footer>
-
+<script src="simulador_completo.js"></script>
+<script src="utilitarios.js"></script>
 </body>
 </html>
