@@ -1,104 +1,129 @@
+
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-  <meta charset="UTF-8">
-  <title>Sistema de Créditos</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Simulador de Crédito</title>
+
+    <link rel="stylesheet" href="simulador_completo.css">
+
+    <script src="simulador_completo.js" defer></script>
 </head>
+
 <body>
 
-<header>
-  <h1>Sistema Básico de Créditos</h1>
-   <link rel="stylesheet" href="simulador_completo.css">
-</header>
+    <header>
+        <h1>Simulador de Crédito</h1>
+    </header>
 
-<nav>
-  <button onclick="mostrarSeccion('parametros')">Parámetros</button>
-  <button onclick="mostrarSeccion('clientes')">Clientes</button>
-</nav>
+    <nav>
+        <button type="button" onclick="mostrarSeccion('parametros')">
+            Parámetros
+        </button>
 
-<section id="parametros" class="activa">
-  <h2>Configurar Parámetros</h2>
+        <button type="button" onclick="mostrarSeccion('clientes')">
+            Clientes
+        </button>
+    </nav>
 
-  <label>Tasa de interés:</label>
-  <input type="number"
-    id="tasaInteres"
-    min="10"
-    max="20"
-    value="15">
-  <span>%</span>
+    <main>
 
-  <br>
-  <button onclick="guardarTasa()">Guardar tasa</button>
+        <!-- PARTE 1 Y PARTE 2: NAVEGACIÓN Y TASA -->
+        <section id="parametros" class="activa">
 
-  <p id="mensajeTasa"></p>
-</section>
+            <h2>Configuración de parámetros</h2>
 
-<section id="clientes">
-  <h2>Registro de Clientes</h2>
+            <label for="tasaInteres">Tasa de interés (%):</label>
 
-  <input type="text" >
-  <input type="text" >
-  <input type="text" >
-  <input type="number" >
-  <input type="number" >
+            <input
+                type="number"
+                id="tasaInteres"
+                min="10"
+                max="20"
+                value="15"
+            >
 
-  <br>
+            <button type="button" onclick="guardarTasa()">
+                Guardar tasa
+            </button>
 
-  <button >Guardar cliente</button>
-  <button >Limpiar</button>
+            <p id="mensajeTasa"></p>
 
-  <table>
-    <thead>
-      <tr>
-        <th>Cédula</th>
-        <th>Nombre</th>
-        <th>Apellido</th>
-        <th>Ingresos</th>
-        <th>Egresos</th>
-        <th>Acciones</th>
-      </tr>
-    </thead>
-    <tbody id="tablaClientes">
-       <tr>
-          <td>1712345678</td>
-          <td>Juan</td>
-          <td>Pérez</td>
-          <td>1200</td>
-          <td>500</td>
-          <td>
-            <button>Actualizar</button>
-            <button>Eliminar</button>
-          </td>
-        </tr>
-        <tr>
-          <td>1723456789</td>
-          <td>María</td>
-          <td>Gómez</td>
-          <td>1500</td>
-          <td>600</td>
-          <td>
-            <button>Actualizar</button>
-            <button>Eliminar</button>
-          </td>
-        </tr>
-        <tr>
-          <td>1734567890</td>
-          <td>Carlos</td>
-          <td>Ramírez</td>
-          <td>900</td>
-          <td>350</td>
-          <td>
-            <button>Actualizar</button>
-            <button>Eliminar</button>
-          </td>
-        </tr>
-    </tbody>
-  </table>
-</section>
+        </section>
 
+        <!-- PARTE 3: ADMINISTRACIÓN DE CLIENTES -->
+        <section id="clientes">
 
+            <h2>Administración de clientes</h2>
 
-<script src="simulador_completo.js"></script>
-<script src="utilitarios.js"></script>
+            <div>
+                <label for="txtCedula">Cédula:</label>
+
+                <input
+                    type="text"
+                    id="txtCedula"
+                    placeholder="Ingrese la cédula"
+                    maxlength="10"
+                    inputmode="numeric"
+                >
+            </div>
+
+            <div>
+                <label for="txtNombre">Nombre:</label>
+
+                <input
+                    type="text"
+                    id="txtNombre"
+                    placeholder="Ingrese el nombre"
+                >
+            </div>
+
+            <div>
+                <label for="txtEdad">Edad:</label>
+
+                <input
+                    type="number"
+                    id="txtEdad"
+                    placeholder="Ingrese la edad"
+                    min="0"
+                >
+            </div>
+
+            <div>
+                <button type="button" onclick="guardarCliente()">
+                    Guardar cliente
+                </button>
+
+                <button type="button" onclick="limpiar()">
+                    Limpiar
+                </button>
+            </div>
+
+            <p id="mensajeCliente"></p>
+
+            <h3>Lista de clientes</h3>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Cédula</th>
+                        <th>Nombre</th>
+                        <th>Edad</th>
+                        <th>Acción</th>
+                    </tr>
+                </thead>
+
+                <tbody id="tablaClientes">
+                </tbody>
+            </table>
+
+        </section>
+
+    </main>
+
 </body>
+
 </html>
