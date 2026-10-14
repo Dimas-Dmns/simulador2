@@ -23,9 +23,15 @@ function ocultarSecciones() {
 
 function mostrarSeccion(id) {
     ocultarSecciones();
+
     let componente = document.getElementById(id);
+
     if (componente !== null) {
         componente.classList.add("activa");
+    }
+
+    if (id === "listaCreditos") {
+        pintarCreditos(creditos);
     }
 }
 
@@ -456,3 +462,4 @@ function buscarCreditosCliente() {
 
     pintarCreditos(creditosEncontrados);
 }
+pintarCreditos(creditos);
