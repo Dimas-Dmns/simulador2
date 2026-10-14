@@ -438,3 +438,21 @@ function pintarCreditos(creditos) {
             "Créditos encontrados: " + creditos.length;
     }
 }
+
+function buscarCreditosCliente() {
+    let cedula = document
+        .getElementById("buscarCedulaListado")
+        .value
+        .trim();
+
+    let mensaje = document.getElementById("mensajeHistorial");
+
+    if (cedula === "") {
+        mensaje.textContent = "Ingresa la cédula del cliente.";
+        return;
+    }
+
+    let creditosEncontrados = buscarCreditos(cedula);
+
+    pintarCreditos(creditosEncontrados);
+}
