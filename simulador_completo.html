@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -26,6 +27,10 @@
 
         <button type="button" onclick="mostrarSeccion('creditos')">
             Créditos
+        </button>
+
+        <button type="button" onclick="mostrarSeccion('listaCreditos')">
+            Créditos Registrados
         </button>
     </nav>
 
@@ -80,7 +85,7 @@
                 <input
                     type="text"
                     id="txtApellido"
-                    placeholder="Ingresa el apellido"
+                    placeholder="Ingrese el apellido"
                 >
             </div>
 
@@ -131,24 +136,32 @@
                         <th>Acción</th>
                     </tr>
                 </thead>
+
                 <tbody id="tablaClientes"></tbody>
             </table>
         </section>
 
-        <!-- SECCIÓN: CRÉDITOS -->
+        <!-- SECCIÓN: SIMULACIÓN DE CRÉDITO -->
         <section id="creditos">
             <h2>Simulación de Crédito</h2>
 
             <div class="formulario">
-                <label for="txtCedulaCredito">Cédula del cliente:</label>
+                <label for="txtCedulaCredito">
+                    Cédula del cliente:
+                </label>
+
                 <input
                     type="text"
                     id="txtCedulaCredito"
                     maxlength="10"
+                    inputmode="numeric"
                     placeholder="Ingresa la cédula"
                 >
 
-                <button type="button" onclick="buscarClienteCredito()">
+                <button
+                    type="button"
+                    onclick="buscarClienteCredito()"
+                >
                     Buscar cliente
                 </button>
             </div>
@@ -158,94 +171,106 @@
             <div id="datosClienteCredito"></div>
 
             <div class="formulario">
-                <label for="txtMontoCredito">Monto solicitado ($):</label>
+                <label for="txtMontoCredito">
+                    Monto solicitado ($):
+                </label>
+
                 <input
                     type="number"
                     id="txtMontoCredito"
                     min="1"
+                    step="0.01"
                     placeholder="Ejemplo: 2000"
                 >
 
-                <label for="txtPlazoCredito">Plazo en años:</label>
+                <label for="txtPlazoCredito">
+                    Plazo en años:
+                </label>
+
                 <input
                     type="number"
                     id="txtPlazoCredito"
                     min="1"
+                    step="1"
                     placeholder="Ejemplo: 2"
                 >
 
-                <button type="button" onclick="calcularCreditoCliente()">
+                <button
+                    type="button"
+                    onclick="calcularCreditoCliente()"
+                >
                     Calcular crédito
                 </button>
             </div>
 
             <div id="resultadoCredito"></div>
+
+            <!-- PASO 2: ASIGNAR CRÉDITO -->
             <button
-    type="button"
-    id="btnAsignarCredito"
-    onclick="asignarCredito()"
-    disabled
->
-    Asignar Crédito
-</button>
-<button
-    type="button"
-    onclick="mostrarSeccion('listaCreditos')"
->
-    Créditos Registrados
-</button>
+                type="button"
+                id="btnAsignarCredito"
+                onclick="asignarCredito()"
+                disabled
+            >
+                Asignar Crédito
+            </button>
+
         </section>
-<!-- SECCIÓN: CRÉDITOS REGISTRADOS -->
-<section id="listaCreditos">
 
-    <h2>Créditos Registrados</h2>
+        <!-- PASOS 3 AL 7: HISTORIAL DE CRÉDITOS -->
+        <section id="listaCreditos">
+            <h2>Créditos Registrados</h2>
 
-    <label for="buscarCedulaListado">
-        Cédula del cliente:
-    </label>
+            <div class="formulario">
+                <label for="buscarCedulaListado">
+                    Cédula del cliente:
+                </label>
 
-    <input
-        type="text"
-        id="buscarCedulaListado"
-        maxlength="10"
-        inputmode="numeric"
-        placeholder="Ingrese la cédula"
-    >
+                <input
+                    type="text"
+                    id="buscarCedulaListado"
+                    maxlength="10"
+                    inputmode="numeric"
+                    placeholder="Ingrese la cédula"
+                >
 
-    <button
-        type="button"
-        onclick="buscarCreditosCliente()"
-    >
-        Buscar
-    </button>
+                <button
+                    type="button"
+                    onclick="buscarCreditosCliente()"
+                >
+                    Buscar créditos
+                </button>
 
-    <button
-        type="button"
-        onclick="pintarCreditos(creditos)"
-    >
-        Ver todos
-    </button>
+                <button
+                    type="button"
+                    onclick="pintarCreditos(creditos)"
+                >
+                    Ver todos los créditos
+                </button>
+            </div>
 
-    <p id="mensajeHistorial"></p>
+            <p id="mensajeHistorial"></p>
 
-    <table>
-        <thead>
-            <tr>
-                <th>Cédula</th>
-                <th>Nombre</th>
-                <th>Apellido</th>
-                <th>Monto</th>
-                <th>Tasa</th>
-                <th>Plazo</th>
-                <th>Cuota</th>
-            </tr>
-        </thead>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Cédula</th>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Monto</th>
+                        <th>Tasa</th>
+                        <th>Plazo</th>
+                        <th>Cuota</th>
+                    </tr>
+                </thead>
 
-        <tbody id="tablaCreditos"></tbody>
-    </table>
+                <tbody id="tablaCreditos"></tbody>
+            </table>
 
-</section>
+        </section>
+
     </main>
 
 </body>
+
 </html>
