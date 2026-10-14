@@ -2,6 +2,13 @@ let clientes = [];
 let clienteSeleccionado = null;
 let tasaInteres = 15;
 let clienteCreditoSeleccionado = null;
+let creditos = [];
+
+let montoCalculado = 0;
+let tasaCreditoCalculada = 0;
+let plazoIngresado = 0;
+let cuotaCalculada = 0;
+let creditoAprobadoActual = false;
 
 /* =========================================
    PARTE 1: NAVEGACIÓN ENTRE SECCIONES
@@ -356,3 +363,34 @@ function calcularCreditoCliente() {
 
 // Inicializar tabla al cargar
 pintarClientes();
+
+
+function asignarCredito() {
+    if (
+        !creditoAprobadoActual ||
+        clienteCreditoSeleccionado === null
+    ) {
+        document.getElementById("mensajeCredito").textContent =
+            "Solo puedes asignar un crédito aprobado.";
+        return;
+    }
+
+    let credito = {
+        cedula: clienteCreditoSeleccionado.cedula,
+        nombre: clienteCreditoSeleccionado.nombre,
+        apellido: clienteCreditoSeleccionado.apellido,
+        monto: montoCalculado,
+        tasa: tasaCreditoCalculada,
+        plazo: plazoIngresado,
+        cuota: cuotaCalculada
+    };
+
+    creditos.push(credito);
+
+    document.getElementById("mensajeCredito").textContent =
+        "Crédito asignado correctamente.";
+
+    document.getElementById("btnAsignarCredito").disabled = true;
+
+    creditoAprobadoActual = false;
+}
