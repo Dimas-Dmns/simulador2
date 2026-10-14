@@ -406,3 +406,35 @@ function buscarCreditos(cedula) {
 
     return creditosEncontrados;
 }
+
+
+function pintarCreditos(creditos) {
+    let contenido = "";
+
+    for (let i = 0; i < creditos.length; i++) {
+        let credito = creditos[i];
+
+        contenido += `
+            <tr>
+                <td>${escaparHTML(credito.cedula)}</td>
+                <td>${escaparHTML(credito.nombre)}</td>
+                <td>${escaparHTML(credito.apellido)}</td>
+                <td>$${Number(credito.monto).toFixed(2)}</td>
+                <td>${Number(credito.tasa).toFixed(2)}%</td>
+                <td>${credito.plazo} años</td>
+                <td>$${Number(credito.cuota).toFixed(2)}</td>
+            </tr>
+        `;
+    }
+
+    document.getElementById("tablaCreditos").innerHTML = contenido;
+
+    let mensaje = document.getElementById("mensajeHistorial");
+
+    if (creditos.length === 0) {
+        mensaje.textContent = "No se encontraron créditos registrados.";
+    } else {
+        mensaje.textContent =
+            "Créditos encontrados: " + creditos.length;
+    }
+}
