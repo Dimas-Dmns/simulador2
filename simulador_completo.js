@@ -88,6 +88,9 @@ function guardarCliente() {
     let egresosTexto =
         document.getElementById("txtEgresos").value;
 
+    let valorCorreo =
+    document.getElementById("txtCorreo").value;
+
     let valorIngresos = Number(ingresosTexto);
     let valorEgresos = Number(egresosTexto);
 
@@ -139,6 +142,7 @@ function guardarCliente() {
         clienteSeleccionado.apellido = valorApellido;
         clienteSeleccionado.ingresos = valorIngresos;
         clienteSeleccionado.egresos = valorEgresos;
+        clienteCreditoSeleccionado.correo= valorCorreo;
 
         mensaje.textContent =
             "Cliente actualizado correctamente.";
@@ -156,7 +160,8 @@ function guardarCliente() {
             nombre: valorNombre,
             apellido: valorApellido,
             ingresos: valorIngresos,
-            egresos: valorEgresos
+            egresos: valorEgresos,
+            correo: valorCorreo
         };
 
         clientes.push(datoCliente);
@@ -658,3 +663,7 @@ function buscarCreditosCliente() {
 ========================================= */
 
 pintarClientes();
+
+function contacto(){
+    let cont = document.getElementById("contact")
+}
