@@ -94,7 +94,14 @@
                     placeholder="Ingrese el apellido"
                 >
             </div>
-
+   <div>
+                <label for="txtCorreo">Correo Electronico:</label>
+                <input
+                    type="email"
+                    id="txtCorreo"
+                    placeholder="Ejemplo: Jose@gmail.com"
+                >
+            </div>
             <div>
                 <label for="txtIngresos">Ingresos mensuales:</label>
                 <input
@@ -115,14 +122,7 @@
                 >
             </div>
 
-            <div>
-                <label for="txtCorreo">Correo Electronico:</label>
-                <input
-                    type="text"
-                    id="txtCorreo"
-                    placeholder="Ejemplo: Jose@gmail.com"
-                >
-            </div>
+         
             <div>
                 <button type="button" onclick="guardarCliente()">
                     Guardar cliente
@@ -143,9 +143,9 @@
                         <th>Cédula</th>
                         <th>Nombre</th>
                         <th>Apellido</th>
+                          <th>Correo Electronico</th>
                         <th>Ingresos</th>
                         <th>Egresos</th>
-                        <th>Correo</th>
                         <th>Acción</th>
                     </tr>
                 </thead>
